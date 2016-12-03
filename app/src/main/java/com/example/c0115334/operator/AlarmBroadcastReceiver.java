@@ -22,9 +22,6 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         this.context = context;
-
-        Log.d("AlarmBroadcastReceiver","onReceive() pid=" + android.os.Process.myPid());
-
         int bid = intent.getIntExtra("intentId",0);
 
         Intent intent2 = new Intent(context, MainActivity.class);
@@ -37,8 +34,8 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setTicker("時間です")
                 .setWhen(System.currentTimeMillis())
-                .setContentTitle("TestAlarm "+bid)
-                .setContentText("時間になりました")
+                .setContentTitle("Operator")
+                .setContentText("起きる時間です")
                 // 音、バイブレート、LEDで通知
                 .setDefaults(Notification.DEFAULT_ALL)
                 // 通知をタップした時にMainActivityを立ち上げる
