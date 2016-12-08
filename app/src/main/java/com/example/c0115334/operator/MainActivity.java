@@ -7,50 +7,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.app.TimePickerDialog;
-
 import java.util.Calendar;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TimePicker;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*Button betTimeSet = (Button)findViewById(R.id.button1);
-        betTimeSet.setOnClickListener(this);*/
-    }
-
-    @Override
-    public void onClick(View v) {
-        /*Intent bootIntent = new Intent(MainActivity.this, BedTimeReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, bootIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-
-        Calendar startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 15);
-        startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.SECOND, 0);
-        long alarmStartTime = startTime.getTimeInMillis();
-
-        alarm.set(AlarmManager.RTC_WAKEUP, alarmStartTime, alarmIntent);
-        Toast.makeText(MainActivity.this, "通知をセットしました！", Toast.LENGTH_SHORT).show();
-        */
     }
 
     public void setUpTime(View v) {
@@ -64,10 +32,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         //受け取った時間と今の時間を比較して明日なのか今日なのかを判定
-                        if (Integer.parseInt(String.valueOf(hourOfDay)+String.valueOf(minute)) >=
+                        if (Integer.parseInt(String.valueOf(hourOfDay)+String.valueOf(minute)) <=
                                 Integer.parseInt(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) + String.valueOf(calendar.get(Calendar.MINUTE)))){
                             calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)+1);
-                        }
+                           }
                         //受け取った値をセット
                         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         calendar.set(Calendar.MINUTE, minute );
@@ -99,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        //Toast.makeText(MainActivity.this, hourOfDay+"時"+minute+"分", Toast.LENGTH_LONG).show();
                         startTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         startTime.set(Calendar.MINUTE, minute);
                         startTime.set(Calendar.SECOND, 0);
@@ -109,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         long alarmStartTime = startTime.getTimeInMillis();
                         alarm.set(AlarmManager.RTC_WAKEUP, alarmStartTime, alarmIntent);
                         Toast.makeText(MainActivity.this, "通知をセットしました！", Toast.LENGTH_SHORT).show();
-
                     }
                 }, hour, minute, true);
         timePickerDialog.show();

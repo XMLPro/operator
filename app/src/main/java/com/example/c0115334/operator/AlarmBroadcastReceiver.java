@@ -15,18 +15,15 @@ import android.widget.Toast;
 import android.util.Log;
 
 public class AlarmBroadcastReceiver extends BroadcastReceiver {
-
     Context context;
-
     @Override   // データを受信した
     public void onReceive(Context context, Intent intent) {
-
         this.context = context;
         int bid = intent.getIntExtra("intentId",0);
 
-        Intent intent2 = new Intent(context, MainActivity.class);
+        intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, bid, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getActivity(context, bid, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManager notificationManager =
                 (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -41,7 +38,6 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
                 // 通知をタップした時にMainActivityを立ち上げる
                 .setContentIntent(pendingIntent)
                 .build();
-
         // 古い通知を削除
         notificationManager.cancelAll();
         // 通知
