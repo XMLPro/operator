@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setSleepTime(View v) {
+        final TextView textView4 = (TextView) findViewById(R.id.textView4);
 
         final Calendar calendar = Calendar.getInstance();
         final int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -109,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         long alarmStartTime = startTime.getTimeInMillis();
                         alarm.set(AlarmManager.RTC_WAKEUP, alarmStartTime, alarmIntent);
                         Toast.makeText(MainActivity.this, "通知をセットしました！", Toast.LENGTH_SHORT).show();
+                        String setTime = String.valueOf(hourOfDay) + "時" + String.valueOf(minute) + "分";
+                        textView4.setText(setTime);
 
                     }
                 }, hour, minute, true);
