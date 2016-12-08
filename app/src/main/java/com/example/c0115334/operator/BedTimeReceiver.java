@@ -24,7 +24,7 @@ public class BedTimeReceiver extends BroadcastReceiver{
                 .setContentTitle("寝ましょう！！")
                 .setContentText("スマホを見るな！")
                 .setWhen(System.currentTimeMillis())
-                .setAutoCancel(true)
+                .setAutoCancel(true).setDefaults(Notification.DEFAULT_ALL)
         ;
 
         myNotification.notify(notificationId, builder.build());
