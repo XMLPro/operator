@@ -15,6 +15,7 @@ public class TodoAdapter {
 
     private SQLiteDatabase db;
     static private DBOpenHelper helper;
+    ContentValues values = new ContentValues();
 
     // コンストラクタ
     public TodoAdapter(Context context){
@@ -29,9 +30,14 @@ public class TodoAdapter {
 
     // 追加
     public void insert(String memo){
-        ContentValues values = new ContentValues();
         values.put("memo", memo);
         db.insertOrThrow(DBOpenHelper.TABLE_NAME, null, values);
+    }
+
+    //削除
+    public  void delete(){
+        //values.clear();
+        //db.insertOrThrow(DBOpenHelper.TABLE_NAME, null, values);
     }
 
 }
